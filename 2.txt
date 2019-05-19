@@ -1,0 +1,4 @@
+SimpleChat 소스 분석 보고서
+1. 2개 소스의 전체적인 흐름을 이해하여 설명하는 내용
+SimpleChat은 Server 창이 하나 열고, 채팅에 참여를 원하는 수 만큼 Client창을 열어서 Server에 접속하는 것으로 시작한다. 서로 접속이 완료되면 간단하게 서로 대화할 수 있는 서비스가 제공되며 이야기를 주고 받는 것이 각 Client 창에 나타난다. 전체적으로 보면, Client가 request를 보냈을 때 Server가 response하는 과정이 핵심이다.
+
