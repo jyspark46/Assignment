@@ -1,0 +1,6 @@
+1) 각 클래스(4개)의 역할
+	ChatServer  Client 접속 수 만큼 ChatThread를 만들어 줌으로써 채팅의 준비 단계를 생성함
+	ChatThread  각 Client와의 socket통신을 통해 sendmsg 또는 broadcast의 역할을 수행함
+	ChatClient  다른 사용자가 입력한 말과 본인이 입력한 말을 read하고, 그 말을 다른 사용자와 본인의 채팅창에 write하는 역할을 수행함
+	InputThread  현재 사용자에서 다른 사용자의 대화를 읽어들이는 동작을 각 사용자마다 따로 실행함
+
