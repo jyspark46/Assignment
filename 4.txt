@@ -1,0 +1,10 @@
+2) 각 생성자, 메소드의 역할
+ ChatServer의 생성자, 메소드
+	ChatThread(메소드1-생성자)  pw와 br을 통해 client의 말들을 읽고 쓸 환경을 만듦
+	Run(메소드2)  무엇인가가 읽혔다면 while을 통해 멈출지, sendmsg할지, broadcast할지 결정
+	Sendmsg(메소드3)  user이름과 msg내용을 구분해서 특정 user에게만 귓속말 형태로 메시지를 보냄
+	Broadcast(메소드4)  채팅방에 참여한 모든 client들에게 메시지를 보냄
+ ChatClient의 생성자, 메소드
+	InputThread(메소드1-생성자)  파라미터로 넘어온 sock과 br을 본인의 sock과 br로 정의
+	Run(메소드2)  무엇인가가 읽혔다면 현재 채팅창에 출력
+
