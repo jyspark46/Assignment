@@ -1,5 +1,5 @@
 3) Reader, Writer 객체들의 역할, 동작 방식
-	pw(writer)  client들이 입력한 내용들을 채팅창에 출력
-	br(reader)  client들이 입력한 내용들을 읽어들임
-	keyboard(reader)  현재 사용자가 키보드를 통해 입력한 내용들을 읽어들임
+	pw(writer)  client들이 입력한 내용들을 채팅창에 출력
+	br(reader)  client들이 입력한 내용들을 읽어들임
+	keyboard(reader)  현재 사용자가 키보드를 통해 입력한 내용들을 읽어들임
 
