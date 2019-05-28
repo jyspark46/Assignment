@@ -1,0 +1,109 @@
+#include "BinTree.h"
+#include "LinkedQueue.h"
+
+// BinTree Constructor
+BinTree::BinTree(){
+  root = NULL;
+}
+
+// BinTree Destructor
+BinTree::~BinTree(){
+  // (this is NOT a part of Lab14-2)
+  // * POINT TO THINK:
+  // How to properly deallocate the memory blocks
+  // assigned for the tree contents, when the tree is removed
+}
+
+// Is Empty?
+bool BinTree::IsEmptyT(){
+  return root == NULL;
+}
+
+// Traverse (In-order) Wrapper
+//  - Invokes the recursion body, TraverseInorder(tree_pointer ptr)
+void BinTree::TraverseInorder(){
+  std::cout << "[";
+  TraverseInorder(root);  // Invokes its recursion body
+  std::cout << "]" << std::endl;
+}
+
+// Traverse (In-order) Recursion body
+void BinTree::TraverseInorder(tree_pointer ptr){
+  if(ptr){
+    TraverseInorder(ptr->left_child);
+    std::cout << ptr->data << " ";
+    TraverseInorder(ptr->right_child);
+  }
+}
+
+// Traverse (Pre-order) Wrapper
+//  - Invokes the recursion body, TraversePreorder(tree_pointer ptr)
+void BinTree::TraversePreorder(){
+  std::cout << "[";
+  TraversePreorder(root); // Invokes its recursion body
+  std::cout << "]" << std::endl;
+}
+
+// Traverse (Pre-order) Recursion body
+void BinTree::TraversePreorder(tree_pointer ptr){
+  if(ptr){
+    std::cout << ptr->data << " ";
+    TraversePreorder(ptr->left_child);
+    TraversePreorder(ptr->right_child);
+  }
+}
+
+// Traverse (Post-order) Wrapper
+//  - Invokes the recursion body, TraversePostorder(tree_pointer ptr)
+void BinTree::TraversePostorder(){
+  std::cout << "[";
+  TraversePostorder(root); // Invokes its recursion body
+  std::cout << "]" << std::endl;
+}
+
+// Traverse (Post-order) Recursion body
+void BinTree::TraversePostorder(tree_pointer ptr){
+  if(ptr){
+    TraversePostorder(ptr->left_child);
+    TraversePostorder(ptr->right_child);
+    std::cout << ptr->data << " ";
+  }
+}
+
+// An insertion function - provided to build a tree to play with
+void BinTree::Insert_level_order(Element new_item){
+  // create a new tree_node
+  tree_node *new_tree_node = new tree_node();
+
+  if(new_tree_node == NULL){
+    std::cerr << "BinTree is full" << std::endl;
+    return;
+  }
+  new_tree_node->data = new_item;
+
+  // If the tree is empty, the new_node becomes the root
+  if(IsEmptyT()){
+    root = new_tree_node;
+    return;
+  }
+
+  // Instantiate a Queue
+  LinkedQueue *q = new LinkedQueue();
+  q->Enqueue(root);
+  while(!q->IsEmptyQ()){
+    tree_pointer temp = q->Dequeue();
+
+    if(temp->left_child == NULL){
+      temp->left_child = new_tree_node;
+      break;
+    }else
+      q->Enqueue(temp->left_child);
+
+    if(temp->right_child == NULL){
+      temp->right_child = new_tree_node;
+      break;
+    }else
+      q->Enqueue(temp->right_child);
+  }//end-of-while
+}//end-of-Insert_level_order()
+
