@@ -1,0 +1,109 @@
+#include <iostream>
+#include "Hashtable.h"
+
+using namespace std;
+
+// function prototype
+int task2_solution(string);
+
+// main
+int main(void){
+
+  /*** Task 1 - play with a hashtable ***/
+  cout << "## TASK 1 ##" << endl;
+
+  // TODO: take a moment with class Hashtable and get some understanding of the class
+  Hashtable *hash = new Hashtable();
+
+  // Insert the following key-value pairs
+  //   "Handong" -> 1995
+  //   "global"  -> 987
+  //   "univ"    -> 101
+  hash->Insert("Handong", 1995);
+  hash->Insert("global", 987);
+  hash->Insert("univ", 101);
+
+  cout << "****** Probe 1 : hash->ListAll() ******" << endl;
+  hash->ListAll();
+
+  // test insertion with a duplicate key --> disregards the input
+  hash->Insert("global", 500);
+  cout << "****** Probe 2 : hash->ListAll() ******" << endl;
+  hash->ListAll();
+
+  // Delete global and insertion "global" - 500
+  hash->Delete("global");
+  hash->Insert("global", 500);
+
+  // Delete univ and insertion "university" - 103
+  hash->Delete("univ");
+  hash->Insert("university", 103);
+  cout << "****** Probe 3 : hash->ListAll() ******" << endl;
+  hash->ListAll();
+
+  // Testing the Has() function
+  cout << "****** Probe 4 : hash->Has(.) ******" << endl;
+  cout << "hash->Has(\"univ\")=" << hash->Has("univ") << endl;
+  cout << "hash->Has(\"global\")=" << hash->Has("global") << endl;
+
+
+
+  /*** Task 2 - first unique character in a string ***/
+  cout << "\n\n## TASK 2 ##" << endl;
+  
+  // TODO: Go to line# 74 and write your solution
+  string str1 = "whippoorwill";
+  string str2 = "chattahoochee";
+  string str3 = "tennessee";
+  string str4 = "ippississim";
+  string str5 = "stubbornness";
+  string str6 = "successfully";
+  string str7 = "suddenness";
+
+  cout << "task2_solution(\"" << str1 << "\")=" << task2_solution(str1) << endl;
+  cout << "task2_solution(\"" << str2 << "\")=" << task2_solution(str2) << endl;
+  cout << "task2_solution(\"" << str3 << "\")=" << task2_solution(str3) << endl;
+  cout << "task2_solution(\"" << str4 << "\")=" << task2_solution(str4) << endl;
+  cout << "task2_solution(\"" << str5 << "\")=" << task2_solution(str5) << endl;
+  cout << "task2_solution(\"" << str6 << "\")=" << task2_solution(str6) << endl;
+  cout << "task2_solution(\"" << str7 << "\")=" << task2_solution(str7) << endl;
+}
+
+
+// Your solution to Task 2
+int task2_solution(string str){
+  // TODO: Write your solution here
+  Hashtable *freq = new Hashtable();
+  
+  char c[str.length()];
+  // Analyze the input string
+  for(int i = 0; i < str.length(); i++) {
+  	// Foreach character c in string str
+  	c[i] = str[i];
+  	
+  	// Create a new string, s from c
+  	string s(1, str[i]);
+  	
+  	// If freq has s as a key
+  	if(freq->Has(s)) {
+  		char tmp = freq->Delete(s);
+  		freq->Insert(s, tmp + 1);
+  	}
+  	else
+  		freq->Insert(s,1);
+  }
+
+  // Find the first unique character
+  for(int i = 0; i < str.length(); i++) {
+  	// Foreach character c in string str;
+  	c[i] = str[i];
+  	
+  	// Create a new string, s from c
+  	string s(1, str[i]);
+  	
+  	if(freq->Find(s) == 1)
+  		return i;
+  }
+  return -1;
+}
+
