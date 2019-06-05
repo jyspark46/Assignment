@@ -109,6 +109,3 @@ void Sort::Mergesort(Element *list, Element *sorted, int low, int high){
 		Merge(list, sorted, low, mid, high);
 	}
 }
-
-void Sort::m_sort(Element list[], Element sorted[], int array_size) {
-  m_sort(list, sorted}
