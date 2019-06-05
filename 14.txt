@@ -1,0 +1,115 @@
+#include "Sort.h"
+
+void Sort::swap(Element *a, Element *b){
+  Element tmp = *a;
+  *a = *b;
+  *b = tmp;
+}//end-of-function swap()
+
+
+void Sort::Bubblesort(Element *list, int n){
+  // TODO: Complete this function
+  int i = 0, j = 0;
+  
+  for(i = 0; i < n - 1; i++) {
+  	for(j = 0; j < n - i - 1; j++) {
+  		if(list[j].key > list[j + 1].key)
+  			swap(&list[j], &list[j + 1]);
+  	}
+  }
+}
+
+
+void Sort::Selectionsort(Element *list, int n){
+  // TODO: Complete this function
+  int i = 0, j = 0, min = 0;
+  Element tmp;
+  
+  for(i = 0; i < n - 1; i++) {
+  	// list[i] ~ list[n - 1] 에서 최솟값 찾기
+  	min = i;
+  	for(j = i + 1; j < n; j++) {
+  		if(list[j].key < list[min].key)
+  			min = j;
+  	}
+  	
+  	// list[i] & list[min] 값 바꾸기
+  	tmp = list[i];
+  	list[i] = list[min];
+  	list[min] = tmp;
+  }
+}
+
+// utility for heap sort
+void Sort::Heap_adjust(Element *list, int root, int n){
+  // TODO: complete this function
+  Element tmp = list[root];
+	int rootkey = list[root].key;
+	int child = 2 * root; // left child
+	
+	while(child <= n) {
+		if((child < n) && (list[child].key < list[child + 1].key))
+			child++; // right child is larger
+		if(rootkey > list[child].key)
+			break;
+		else {
+			list[child / 2] = list[child];
+			child *= 2;
+		}
+	}
+	list[child / 2] = tmp;
+}
+
+void Sort::Heapsort(Element *list, int n){
+  // TODO: Complete this function
+  int i = 0, j = 0;
+  
+  // n/2 ~ 1까지 tree를 heap으로 바꾼다(adjust)
+  for(i = n / 2; i > 0; i--)
+  	Heap_adjust(list, i, n);
+  
+  // 가장 큰 수 deletion 진행(= MaxHeap 에서의 deletion)
+  for(i = n - 1; i > 0; i--) {
+  	// 가장 큰 수를 맨 마지막으로
+  	swap(&list[1], &list[i + 1]);
+
+	  // unsorted 부분에서 adjust 진행
+	  Heap_adjust(list, 1, i);
+  }
+}
+
+void Sort::Merge(Element list[], Element sorted[], int i, int m, int n){
+  int j, k, t;
+  j = m + 1;  // boundary between two sorted lists
+  k = i;
+  
+  while(i <= m && j <= n) {
+    if(list[i].key < list[j].key)
+    	sorted[k++] = list[i++];
+    else
+    	sorted[k++] = list[j++];
+  }
+  
+  if(i > m) {  // All elements in left list are copied
+    for(t = j ; t <= n ; t++)  // copy remained elements in right list
+      sorted[k+t-j] = list[t];
+  }
+  else {  // There are remained elements in left list
+    for(t = i; t <= m; t++)  // copy remained elements in left list
+      sorted[k+t-i] = list[t];
+  }
+}
+
+void Sort::Mergesort(Element *list, Element *sorted, int low, int high){
+  // TODO: Complete this function
+	if(low < high) {
+		int mid = (low+high)/2;
+		Mergesort(list, sorted, low, mid);
+		Mergesort(list, sorted, mid+1, high);
+		Merge(list, sorted, low, mid, high);
+	}
+}
+
+void Sort::m_sort(Element list[], Element sorted[], int array_size) {
+  m_sort(list, sorted, 0, array_size - 1);
+}
