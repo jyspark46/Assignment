@@ -1,0 +1,30 @@
+
+#include "Hashtable.h"
+
+
+Hashtable::Hashtable(int max_size){
+  this->max_size = max_size;
+  // table = new int[max_size]; // NOT TODAY
+}
+
+
+int Hashtable::hashFunc1(std::string key){
+  // Hash Function 1 - similar to folding+mod
+  // TODO: Write a hash function that
+  // 1) adds up the ascii code of all characters of key
+  // e.g. key = "abc" = 97 + 98 + 99 = 294
+  //            "Cap" = 67 + 97 + 112 = 276
+  int num = 0;
+  for(int i = 0; i < key.length(); i++)
+  	num += key[i];
+  	
+  // 2) take the mod of the max_size
+  // e.g. "abc" -> 294 -> return 294%max_size
+  //      "Cap" -> 276 -> return 276%max_size
+  return num % max_size;
+  
+  
+  return 0; // update this line
+}
+
+
