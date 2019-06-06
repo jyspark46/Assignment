@@ -27,4 +27,34 @@ int Hashtable::hashFunc1(std::string key){
   return 0; // update this line
 }
 
+#include "Hashtable.h"
+
+Hashtable::Hashtable(){
+  m = new map<string, int>();
+}
+
+
+void Hashtable::Insert(string key, int value){
+  m->insert(make_pair(key, value));
+}
+
+
+int Hashtable::Delete(string key){
+  return m->erase(key);
+}
+
+
+int Hashtable::Find(string key){
+  return m->find(key)->second;
+}
+
+bool Hashtable::Has(string key){
+  return m->find(key) != m->end();
+}
+
+void Hashtable::ListAll(){
+  for(map<string,int>::iterator it = m->begin(); it != m->end(); ++it){
+    cout << "[\"" << it->first << "\"] " << it->second << endl;
+  }
+}
 
